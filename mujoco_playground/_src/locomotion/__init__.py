@@ -34,6 +34,8 @@ from mujoco_playground._src.locomotion.go1 import joystick as go1_joystick
 from mujoco_playground._src.locomotion.go1 import randomize as go1_randomize
 from mujoco_playground._src.locomotion.h1 import inplace_gait_tracking as h1_inplace_gait_tracking
 from mujoco_playground._src.locomotion.h1 import joystick_gait_tracking as h1_joystick_gait_tracking
+from mujoco_playground._src.locomotion.njit_exo import joystick as njit_exo_joystick
+from mujoco_playground._src.locomotion.njit_exo import randomize as njit_exo_randomize
 from mujoco_playground._src.locomotion.op3 import joystick as op3_joystick
 from mujoco_playground._src.locomotion.spot import getup as spot_getup
 from mujoco_playground._src.locomotion.spot import joystick as spot_joystick
@@ -70,6 +72,12 @@ _envs = {
     "Go1Footstand": go1_handstand.Footstand,
     "H1InplaceGaitTracking": h1_inplace_gait_tracking.InplaceGaitTracking,
     "H1JoystickGaitTracking": h1_joystick_gait_tracking.JoystickGaitTracking,
+    "NjitExoJoystickFlatTerrain": functools.partial(
+        njit_exo_joystick.Joystick, task="flat_terrain"
+    ),
+    "NjitExoJoystickRoughTerrain": functools.partial(
+        njit_exo_joystick.Joystick, task="rough_terrain"
+    ),
     "Op3Joystick": op3_joystick.Joystick,
     "SpotFlatTerrainJoystick": functools.partial(
         spot_joystick.Joystick, task="flat_terrain"
@@ -104,6 +112,8 @@ _cfgs = {
     "Go1Footstand": go1_handstand.default_config,
     "H1InplaceGaitTracking": h1_inplace_gait_tracking.default_config,
     "H1JoystickGaitTracking": h1_joystick_gait_tracking.default_config,
+    "NjitExoJoystickFlatTerrain": njit_exo_joystick.default_config,
+    "NjitExoJoystickRoughTerrain": njit_exo_joystick.default_config,
     "Op3Joystick": op3_joystick.default_config,
     "SpotFlatTerrainJoystick": spot_joystick.default_config,
     "SpotGetup": spot_getup.default_config,
@@ -126,6 +136,8 @@ _randomizer = {
     "Go1Getup": go1_randomize.domain_randomize,
     "Go1Handstand": go1_randomize.domain_randomize,
     "Go1Footstand": go1_randomize.domain_randomize,
+    "NjitExoJoystickFlatTerrain": njit_exo_randomize.domain_randomize,
+    "NjitExoJoystickRoughTerrain": njit_exo_randomize.domain_randomize,
     "T1JoystickFlatTerrain": t1_randomize.domain_randomize,
     "T1JoystickRoughTerrain": t1_randomize.domain_randomize,
 }

@@ -1,0 +1,173 @@
+<mujoco model="njit_exo">
+  <compiler angle="radian" inertiafromgeom="auto"/>
+
+  <option iterations="3" ls_iterations="5" timestep="0.002" integrator="Euler">
+    <flag eulerdamp="disable"/>
+  </option>
+
+  <default>
+    <default class="exo">
+      <geom condim="1" contype="0" conaffinity="0"/>
+      <site size="0.01" rgba="1 0 0 1" group="4"/>
+      <joint damping="1.5"/>
+      <position inheritrange="1.0" kp="35"/>
+      <default class="hip">
+        <joint actuatorfrcrange="-100 100" range="-1.309 1.309" armature="0.01" frictionloss="0.3"/>
+      </default>
+      <default class="knee">
+        <joint actuatorfrcrange="-100 100" range="-2.094 0.0" armature="0.01" frictionloss="0.8"/>
+      </default>
+      <default class="ankle_pitch">
+        <joint actuatorfrcrange="-100 100" range="-0.6981 0.2618" armature="0.01" frictionloss="0.5"/>
+      </default>
+      <default class="ankle_roll">
+        <joint actuatorfrcrange="-100 100" range="-0.2618 0.2618" armature="0.01" frictionloss="0.5"/>
+      </default>
+      <default class="visual">
+        <geom density="0" group="2" rgba="0.478431 0.478431 0.478431 1" contype="0" conaffinity="0"/>
+      </default>
+      <default class="collision">
+        <geom group="3" contype="1" conaffinity="1"/>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="exo_material" rgba="0.478431 0.478431 0.478431 1"/>
+  </asset>
+
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="exo_pelvis" pos="3 0 4"/>
+
+    <body name="exo_pelvis" childclass="exo" pos="0 0 0.9" quat="0.707107 0.707107 0 0">
+      <freejoint/>
+      <site name="imu"/>
+      <camera name="front" pos="1.5 -0.5 0.5" xyaxes="0.342 0.940 0.000 -0.321 0.117 0.940" mode="trackcom"/>
+      <camera name="track" pos="1.0 -1.5 0.3" xyaxes="0.814 0.580 0.000 -0.140 0.196 0.971" mode="trackcom"/>
+
+      <inertial pos="0.164969 -0.016465 -0.00031201" quat="1 0 0 0" mass="3.40529"
+        diaginertia="0.108005 0.140273 0.0409718"/>
+
+      <geom class="visual" type="box" size="0.15 0.05 0.25" pos="0.134969 -0.016465 -0.00031201"/>
+
+      <!-- Battery -->
+      <body name="Battery" pos="0 0 0">
+        <inertial pos="-0.0292753 0.0823604 -0.00041407" quat="1 0 0 0" mass="2.2"
+          diaginertia="0.00909547 0.00798838 0.00423978"/>
+      </body>
+
+      <!-- Right Leg -->
+      <body name="r_exo_femur" pos="0.25 -0.06 0.21">
+        <inertial pos="-0.00012287 -0.205637 0.0391034" quat="1 0 0 0" mass="2.77725"
+          diaginertia="0.0378701 0.00419727 0.0353309"/>
+        <joint name="r_hip" class="hip" axis="0 0 1"/>
+        <geom class="visual" type="cylinder" size="0.03 0.25" pos="-0.00012287 -0.205637 0.0201034" quat="0.707107 0.707107 0 0"/>
+
+        <body name="r_exo_tibia" pos="0 -0.41 0">
+          <inertial pos="0.00130324 -0.0640757 0.0163233" quat="1 0 0 0" mass="0.60426"
+            diaginertia="0.00549709 0.00033891 0.00532813"/>
+          <joint name="r_knee" class="knee" axis="0 0 1"/>
+          <geom class="visual" type="cylinder" size="0.03 0.175" pos="0.00130324 -0.2240757 0.0163233" quat="0.707107 0.707107 0 0"/>
+
+          <body name="r_shank_support" pos="0 -0.25 0">
+            <inertial pos="-0.0220563 -0.0501763 -0.0332489" quat="1 0 0 0" mass="0.24824"
+              diaginertia="0.0009242 0.00070211 0.00054663"/>
+
+            <body name="r_ankle_coupling" pos="0 -0.129 0">
+              <inertial pos="0.0270888 -0.0211255 -0.0183098" quat="1 0 0 0" mass="0.194678"
+                diaginertia="0.00020434 0.00086131 0.00083139"/>
+              <joint name="r_ankle_pitch" class="ankle_pitch" axis="0 0 1"/>
+              <geom class="visual" type="cylinder" size="0.0254 0.0127" pos="-0.0784998 -0.1185 -0.135"/>
+
+              <body name="r_foot" pos="0.11 0.001 -0.0699999" quat="0.958225 0 0 0.286109">
+                <inertial pos="-0.0647188 -0.0863198 0.00643328" quat="1 0 0 0" mass="1.39879"
+                  diaginertia="0.00411567 0.0161809 0.0165848"/>
+                <joint name="r_ankle_roll" class="ankle_roll" axis="1 0 0"/>
+                <geom class="visual" type="box" size="0.16 0.025 0.075" pos="-0.0647188 -0.0863198 -0.00643328" quat="0.958225 0 0 -0.286109"/>
+
+                <!-- Ground contact geometry -->
+                <body name="r_foot_ground" pos="0 -0.135 0" quat="0.958225 0 0 -0.286109">
+                  <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-06" diaginertia="1e-06 1e-06 1e-06"/>
+                  <geom name="r_foot_contact" class="collision" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.00"/>
+                  <site name="r_foot" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.00"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- Left Leg -->
+      <body name="l_exo_femur" pos="0.25 -0.06 -0.21">
+        <inertial pos="-0.00012287 -0.205637 -0.0391034" quat="1 0 0 0" mass="2.77725"
+          diaginertia="0.0378701 0.00419727 0.0353309"/>
+        <joint name="l_hip" class="hip" axis="0 0 1"/>
+        <geom class="visual" type="cylinder" size="0.03 0.25" pos="-0.00012287 -0.205637 -0.0291034" quat="0.707107 0.707107 0 0"/>
+
+        <body name="l_exo_tibia" pos="0 -0.41 0">
+          <inertial pos="0.00130324 -0.0640757 -0.0163233" quat="1 0 0 0" mass="0.60426"
+            diaginertia="0.00549709 0.00033891 0.00532813"/>
+          <joint name="l_knee" class="knee" axis="0 0 1"/>
+          <geom class="visual" type="cylinder" size="0.03 0.175" pos="0.00130324 -0.2240757 -0.0263233" quat="0.707107 0.707107 0 0"/>
+
+          <body name="l_shank_support" pos="0 -0.25 0">
+            <inertial pos="-0.0220563 -0.0501763 0.0332489" quat="1 0 0 0" mass="0.24824"
+              diaginertia="0.0009242 0.00070211 0.00054663"/>
+
+            <body name="l_ankle_coupling" pos="0 -0.129 0">
+              <inertial pos="0.0270888 -0.0211255 0.0183098" quat="1 0 0 0" mass="0.194678"
+                diaginertia="0.00020434 0.00086131 0.00083139"/>
+              <joint name="l_ankle_pitch" class="ankle_pitch" axis="0 0 1"/>
+              <geom class="visual" type="cylinder" size="0.0254 0.0127" pos="-0.0784998 -0.1185 0.135"/>
+
+              <body name="l_foot" pos="0.11 0.001 0.0699999" quat="0.958225 0 0 0.286109">
+                <inertial pos="-0.0647188 -0.0863198 -0.00643328" quat="1 0 0 0" mass="1.39879"
+                  diaginertia="0.00411567 0.0161809 0.0165848"/>
+                <joint name="l_ankle_roll" class="ankle_roll" axis="-1 0 0"/>
+                <geom class="visual" type="box" size="0.16 0.025 0.075" pos="-0.0647188 -0.0863198 -0.00643328" quat="0.958225 0 0 -0.286109"/>
+
+                <!-- Ground contact geometry -->
+                <body name="l_foot_ground" pos="0 -0.135 0" quat="0.958225 0 0 -0.286109">
+                  <inertial pos="0 0 0" quat="1 0 0 0" mass="1e-06" diaginertia="1e-06 1e-06 1e-06"/>
+                  <geom name="l_foot_contact" class="collision" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.00"/>
+                  <site name="l_foot" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.00"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position class="hip" name="r_hip" joint="r_hip"/>
+    <position class="knee" name="r_knee" joint="r_knee"/>
+    <position class="ankle_pitch" name="r_ankle_pitch" joint="r_ankle_pitch"/>
+    <position class="ankle_roll" name="r_ankle_roll" joint="r_ankle_roll"/>
+
+    <position class="hip" name="l_hip" joint="l_hip"/>
+    <position class="knee" name="l_knee" joint="l_knee"/>
+    <position class="ankle_pitch" name="l_ankle_pitch" joint="l_ankle_pitch"/>
+    <position class="ankle_roll" name="l_ankle_roll" joint="l_ankle_roll"/>
+  </actuator>
+
+  <sensor>
+    <gyro site="imu" name="gyro"/>
+    <velocimeter site="imu" name="local_linvel"/>
+    <accelerometer site="imu" name="accelerometer"/>
+    <framezaxis objtype="site" objname="imu" name="upvector"/>
+    <framexaxis objtype="site" objname="imu" name="forwardvector"/>
+    <framelinvel objtype="site" objname="imu" name="global_linvel"/>
+    <frameangvel objtype="site" objname="imu" name="global_angvel"/>
+    <framepos objtype="site" objname="imu" name="position"/>
+    <framequat objtype="site" objname="imu" name="orientation"/>
+    <framelinvel objtype="site" objname="l_foot" name="l_foot_global_linvel"/>
+    <framelinvel objtype="site" objname="r_foot" name="r_foot_global_linvel"/>
+    <framexaxis objtype="site" objname="l_foot" name="l_foot_upvector"/>
+    <framexaxis objtype="site" objname="r_foot" name="r_foot_upvector"/>
+    <framepos objtype="site" objname="l_foot" name="l_foot_pos"/>
+    <framepos objtype="site" objname="r_foot" name="r_foot_pos"/>
+  </sensor>
+</mujoco>
