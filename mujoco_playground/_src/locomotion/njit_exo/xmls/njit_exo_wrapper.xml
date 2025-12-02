@@ -1,0 +1,37 @@
+<mujoco model="NJIT_Exo_Master">
+  <compiler angle="radian" meshdir="./" />
+  
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 .05" type="plane" material="grid" condim="3"/>
+
+    <body name="root" pos="0 0 1.0" euler="1.57 0 0">
+      
+      <freejoint/>
+
+      <include file="KF_NJIT_rehab_exo_novisual_boxcollision.urdf"/>
+
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="r_exo_femur"       joint="r_exo_femur"       gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="r_exo_tibia"       joint="r_exo_tibia"       gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="r_ankle_coupling"  joint="r_ankle_coupling"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="r_foot"            joint="r_foot"            gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    
+    <motor name="l_exo_femur"       joint="l_exo_femur"       gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="l_exo_tibia"       joint="l_exo_tibia"       gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="l_ankle_coupling"  joint="l_ankle_coupling"  gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+    <motor name="l_foot"            joint="l_foot"            gear="1" ctrllimited="true" ctrlrange="-100 100"/>
+  </actuator>
+
+</mujoco>

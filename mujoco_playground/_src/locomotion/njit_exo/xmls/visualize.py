@@ -1,7 +1,7 @@
 import mujoco
 from mujoco import viewer
 
-model = mujoco.MjModel.from_xml_path("/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/scene_mjx_rough_terrain.xml")
+model = mujoco.MjModel.from_xml_path("/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/scene_mjx_flat_terrain.xml")
 data = mujoco.MjData(model)
 
 home_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_KEY, "home")
