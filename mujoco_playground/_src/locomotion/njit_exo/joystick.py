@@ -352,6 +352,7 @@ class Joystick(njit_exo_base.NjitExoEnv):
     return state
 
   def _get_termination(self, data: mjx.Data) -> jax.Array:
+    # IMU site has counter-rotation to keep Z-axis pointing up regardless of body orientation
     fall_termination = self.get_gravity(data)[-1] < 0.0
     return (
         fall_termination | jp.isnan(data.qpos).any() | jp.isnan(data.qvel).any()

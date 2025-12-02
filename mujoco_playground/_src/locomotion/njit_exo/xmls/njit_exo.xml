@@ -5,7 +5,7 @@
     <body name="exo_pelvis" pos="0 0 0" quat="1 0 0 0">
 
       <freejoint/>
-      <site name="imu"/>
+      <site name="imu" quat="0.707106 0 -0.707106 0"/>
 
       <inertial pos="0.164969 -0.016465 -0.00031201" mass="3.40529" diaginertia="0.108005 0.140273 0.0409718"/>
       <geom size="0.15 0.05 0.25" pos="0.134969 -0.016465 -0.00031201" type="box" rgba="0.47 0.47 0.47 1"/>
