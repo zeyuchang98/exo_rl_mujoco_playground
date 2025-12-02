@@ -12,18 +12,18 @@
       <body name="r_exo_femur" pos="0.25 -0.06 0.21" quat="0.707107 0 0 0.707107"> 
         <inertial pos="-0.00012287 -0.205637 0.0391034" mass="2.77725" diaginertia="0.03787 0.00419 0.03533"/>
         <joint name="r_exo_femur" axis="0 0 1" range="-1.309 1.309"/>
-        <geom size="0.03 0.25" pos="-0.00012287 -0.205637 0.0201034" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+        <geom size="0.03 0.25" pos="-0.00012287 -0.205637 0.0201034" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.47 0.47 0.47 1"/>
         
         <body name="r_exo_tibia" pos="0 -0.41 0">
           <inertial pos="0.00130324 -0.0640757 0.0163233" mass="0.60426" diaginertia="0.00549 0.00033 0.00532"/>
           <joint name="r_exo_tibia" axis="0 0 1" range="-2.094 0"/>
-          <geom size="0.03 0.175" pos="0.00130324 -0.224076 0.0163233" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+          <geom size="0.03 0.175" pos="0.00130324 -0.224076 0.0163233" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.47 0.47 0.47 1"/>
           
           <body name="r_ankle_coupling" pos="0 -0.25 0">
              <body name="r_ankle_coupling_joint" pos="0 -0.129 0">
                 <inertial pos="0.027 -0.021 -0.018" mass="0.194" diaginertia="0.0002 0.0008 0.0008"/>
                 <joint name="r_ankle_coupling" axis="0 0 1" range="-0.698 0.261"/>
-                <geom size="0.0254 0.0127" pos="-0.078 -0.118 -0.135" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+                <geom size="0.0254 0.0127" pos="-0.078 -0.118 -0.135" type="capsule" rgba="0.47 0.47 0.47 1"/>
                 
                 <body name="r_foot" pos="0.11 0.001 -0.07" quat="0.989 0 0 0.145">
                   <inertial pos="-0.064 -0.086 0.006" mass="1.39" diaginertia="0.004 0.016 0.016"/>
@@ -38,18 +38,18 @@
       <body name="l_exo_femur" pos="0.25 -0.06 -0.21" quat="0.707107 0 0 0.707107">
         <inertial pos="-0.00012287 -0.205637 -0.0391034" mass="2.77725" diaginertia="0.03787 0.00419 0.03533"/>
         <joint name="l_exo_femur" axis="0 0 1" range="-1.309 1.309"/>
-        <geom size="0.03 0.25" pos="-0.00012287 -0.205637 -0.0291034" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+        <geom size="0.03 0.25" pos="-0.00012287 -0.205637 -0.0291034" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.47 0.47 0.47 1"/>
         
         <body name="l_exo_tibia" pos="0 -0.41 0">
           <inertial pos="0.00130324 -0.0640757 -0.0163233" mass="0.60426" diaginertia="0.00549 0.00033 0.00532"/>
           <joint name="l_exo_tibia" axis="0 0 1" range="-2.094 0"/>
-          <geom size="0.03 0.175" pos="0.00130324 -0.224076 -0.0263233" quat="0.707107 0.707107 0 0" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+          <geom size="0.03 0.175" pos="0.00130324 -0.224076 -0.0263233" quat="0.707107 0.707107 0 0" type="capsule" rgba="0.47 0.47 0.47 1"/>
            
           <body name="l_ankle_coupling" pos="0 -0.25 0">
              <body name="l_ankle_coupling_joint" pos="0 -0.129 0">
                 <inertial pos="0.027 -0.021 0.018" mass="0.194" diaginertia="0.0002 0.0008 0.0008"/>
                 <joint name="l_ankle_coupling" axis="0 0 1" range="-0.698 0.261"/>
-                <geom size="0.0254 0.0127" pos="-0.078 -0.118 0.135" type="cylinder" rgba="0.47 0.47 0.47 1"/>
+                <geom size="0.0254 0.0127" pos="-0.078 -0.118 0.135" type="capsule" rgba="0.47 0.47 0.47 1"/>
 
                 <body name="l_foot" pos="0.11 0.001 0.07" quat="0.989 0 0 0.145">
                   <inertial pos="-0.064 -0.086 -0.006" mass="1.39" diaginertia="0.004 0.016 0.016"/>
