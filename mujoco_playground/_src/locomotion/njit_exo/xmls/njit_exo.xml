@@ -3,8 +3,9 @@
 
   <worldbody>
     <body name="exo_pelvis" pos="0 0 0" quat="0.707 0.707 0 0">
-      
-      <freejoint/> 
+
+      <freejoint/>
+      <site name="imu"/>
 
       <inertial pos="0.164969 -0.016465 -0.00031201" mass="3.40529" diaginertia="0.108005 0.140273 0.0409718"/>
       <geom size="0.15 0.05 0.25" pos="0.134969 -0.016465 -0.00031201" type="box" rgba="0.47 0.47 0.47 1"/>
@@ -29,6 +30,7 @@
                   <inertial pos="-0.064 -0.086 0.006" mass="1.39" diaginertia="0.004 0.016 0.016"/>
                   <joint name="r_foot" axis="1 0 0" range="-0.26 0.26"/>
                   <geom name="r_foot" size="0.16 0.025 0.075" pos="-0.064 -0.086 -0.006" type="box" rgba="0.47 0.47 0.47 1"/>
+                  <site name="r_foot" size="0.16 0.025 0.075" pos="-0.064 -0.086 -0.006" type="box"/>
                 </body>
              </body>
           </body>
@@ -55,6 +57,7 @@
                   <inertial pos="-0.064 -0.086 -0.006" mass="1.39" diaginertia="0.004 0.016 0.016"/>
                   <joint name="l_foot" axis="-1 0 0" range="-0.26 0.26"/>
                   <geom name="l_foot" size="0.16 0.025 0.075" pos="-0.064 -0.086 -0.006" type="box" rgba="0.47 0.47 0.47 1"/>
+                  <site name="l_foot" size="0.16 0.025 0.075" pos="-0.064 -0.086 -0.006" type="box"/>
                 </body>
              </body>
           </body>
@@ -74,4 +77,15 @@
     <motor name="l_ankle_coupling" joint="l_ankle_coupling" gear="1" ctrllimited="true" ctrlrange="-100 100"/>
     <motor name="l_foot" joint="l_foot" gear="1" ctrllimited="true" ctrlrange="-100 100"/>
   </actuator>
+
+  <sensor>
+    <gyro site="imu" name="gyro"/>
+    <velocimeter site="imu" name="local_linvel"/>
+    <accelerometer site="imu" name="accelerometer"/>
+    <framezaxis objtype="site" objname="imu" name="upvector"/>
+    <framelinvel objtype="site" objname="imu" name="global_linvel"/>
+    <frameangvel objtype="site" objname="imu" name="global_angvel"/>
+    <framelinvel objtype="site" objname="l_foot" name="l_foot_global_linvel"/>
+    <framelinvel objtype="site" objname="r_foot" name="r_foot_global_linvel"/>
+  </sensor>
 </mujoco>

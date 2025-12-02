@@ -128,23 +128,23 @@ class Joystick(njit_exo_base.NjitExoEnv):
     self._soft_lowers = c - 0.5 * r * self._config.soft_joint_pos_limit_factor
     self._soft_uppers = c + 0.5 * r * self._config.soft_joint_pos_limit_factor
 
-    # Hip indices (hip and knee for exo)
+    # Hip indices (femur joints)
     hip_indices = []
-    for side in ["l", "r"]:
-      hip_indices.append(self._mj_model.joint(f"{side}_hip").qposadr - 7)
+    for joint_name in ["r_exo_femur", "l_exo_femur"]:
+      hip_indices.append(self._mj_model.joint(joint_name).qposadr - 7)
     self._hip_indices = jp.array(hip_indices)
 
-    # Knee indices
+    # Knee indices (tibia joints)
     knee_indices = []
-    for side in ["l", "r"]:
-      knee_indices.append(self._mj_model.joint(f"{side}_knee").qposadr - 7)
+    for joint_name in ["r_exo_tibia", "l_exo_tibia"]:
+      knee_indices.append(self._mj_model.joint(joint_name).qposadr - 7)
     self._knee_indices = jp.array(knee_indices)
 
-    # Weights for pose cost (8 joints: 2 hips, 2 knees, 2 ankle_pitch, 2 ankle_roll)
+    # Weights for pose cost (8 joints)
     # fmt: off
     self._weights = jp.array([
-        1.0, 1.0, 0.5, 0.5,  # right leg: hip, knee, ankle_pitch, ankle_roll
-        1.0, 1.0, 0.5, 0.5,  # left leg: hip, knee, ankle_pitch, ankle_roll
+        1.0, 1.0, 0.5, 0.5,  # right leg: femur, tibia, ankle_coupling, foot
+        1.0, 1.0, 0.5, 0.5,  # left leg: femur, tibia, ankle_coupling, foot
     ])
     # fmt: on
 
@@ -171,9 +171,9 @@ class Joystick(njit_exo_base.NjitExoEnv):
     self._foot_linvel_sensor_adr = jp.array(foot_linvel_sensor_adr)
 
     qpos_noise_scale = np.zeros(8)
-    hip_ids = [0, 4]  # r_hip, l_hip
-    knee_ids = [1, 5]  # r_knee, l_knee
-    ankle_ids = [2, 3, 6, 7]  # ankle_pitch and ankle_roll for both sides
+    hip_ids = [0, 4]  # r_exo_femur, l_exo_femur
+    knee_ids = [1, 5]  # r_exo_tibia, l_exo_tibia
+    ankle_ids = [2, 3, 6, 7]  # ankle_coupling and foot for both sides
     qpos_noise_scale[hip_ids] = self._config.noise_config.scales.hip_pos
     qpos_noise_scale[knee_ids] = self._config.noise_config.scales.knee_pos
     qpos_noise_scale[ankle_ids] = self._config.noise_config.scales.ankle_pos
@@ -603,8 +603,9 @@ class Joystick(njit_exo_base.NjitExoEnv):
       self, data: mjx.Data, contact: jax.Array, info: dict[str, Any]
   ) -> jax.Array:
     del info  # Unused.
-    body_vel = self.get_global_linvel(data)[:2]
-    reward = jp.sum(jp.linalg.norm(body_vel, axis=-1) * contact)
+    feet_vel = data.sensordata[self._foot_linvel_sensor_adr]
+    feet_vel_xy = feet_vel[..., :2]
+    reward = jp.sum(jp.linalg.norm(feet_vel_xy, axis=-1) * contact)
     return reward
 
   def _cost_feet_clearance(
