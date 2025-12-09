@@ -118,12 +118,17 @@
     <position name="l_toe" joint="l_foot" kp="20" ctrllimited="true" ctrlrange="-0.3 0.3"/>
   </actuator>
 
-  <sensor>
+<sensor>
     <accelerometer name="accelerometer" site="imu"/>
     <gyro name="gyro" site="imu"/>
     <framezaxis name="upvector" objtype="site" objname="imu"/>
+    
+    <velocimeter name="local_linvel" site="imu"/>
+    <framelinvel name="global_linvel" objtype="site" objname="imu"/>
+    <frameangvel name="global_angvel" objtype="site" objname="imu"/>
+    
     <velocimeter name="l_foot_global_linvel" site="l_foot"/>
     <velocimeter name="r_foot_global_linvel" site="r_foot"/>
-  </sensor>
+</sensor>
 
 </mujoco>
