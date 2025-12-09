@@ -1,0 +1,185 @@
+<mujoco model="KF_NJIT_Rehab_Exo">
+  <compiler angle="radian"/>
+
+  <worldbody>
+    <body name="base">
+      <inertial pos="0 0 0" mass="0.01" diaginertia="0.0001 0.0001 0.0001"/>
+
+      <body name="exo_pelvis" quat="0.707141 0 -0.707073 0">
+        <inertial pos="0.164969 -0.016465 -0.00031201" quat="0.743135 -0.000846023 -0.000437874 0.669141" mass="3.40529" diaginertia="0.140633 0.107645 0.0409716"/>
+
+        <body name="r_exo_femur" pos="0.25 -0.06 0.21">
+          <inertial pos="-0.00012287 -0.205637 0.0391034" quat="0.70037 0.708893 0.0600663 -0.0578234" mass="2.77725" diaginertia="0.0379443 0.0352615 0.0041924"/>
+          <joint name="r_exo_femur" pos="0 0 0" axis="0 0 1" range="-1.309 1.309" actuatorfrcrange="-100 100"/>
+
+          <body name="r_exo_tibia" pos="0 -0.41 0">
+            <inertial pos="0.00130324 -0.0640757 0.0163233" quat="0.660735 0.7506 -0.000513906 -0.00529609" mass="0.60426" diaginertia="0.00549748 0.00541102 0.000255628"/>
+            <joint name="r_exo_tibia" pos="0 0 0" axis="0 0 1" range="-2.094 0" actuatorfrcrange="-100 100"/>
+
+            <body name="r_shank_support" pos="0 -0.25 0">
+              <inertial pos="-0.0220563 -0.0501763 -0.0332489" quat="0.940229 0.285066 0.178494 0.0533551" mass="0.24824" diaginertia="0.00101633 0.000827772 0.000328839"/>
+
+              <body name="r_ankle_coupling" pos="0 -0.129 0">
+                <inertial pos="0.0270888 -0.0211255 -0.0183098" quat="0.464459 0.388897 0.588349 0.535615" mass="0.194678" diaginertia="0.000918354 0.000829915 0.000148771"/>
+                <joint name="r_ankle_coupling" pos="0 0 0" axis="0 0 1" range="-0.6981 0.2618" actuatorfrcrange="-100 100"/>
+
+                <body name="r_foot" pos="0.11 0.001 -0.0699999" quat="0.989506 0 0 0.144492">
+                  <inertial pos="-0.0647188 -0.0863198 0.00643328" quat="0.669598 0.404663 0.560134 0.272277" mass="1.39879" diaginertia="0.0171733 0.016392 0.00331607"/>
+                  <joint name="r_foot" pos="0 0 0" axis="1 0 0" range="-0.2618 0.2618" actuatorfrcrange="-100 100"/>
+
+                  <body name="r_foot_end" pos="-0.175 0 0">
+                    <inertial pos="0 0 0" mass="1e-06" diaginertia="0.00010572 0.00010572 0.00010572"/>
+
+                  </body>
+
+                  <body name="r_DM_universalJoint" pos="-0.2295 -0.0188 -0.0449999" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0.0155966 7.195e-05 0.00034455" quat="0.495351 0.504606 0.495351 0.504606" mass="0.0206009" diaginertia="4.33037e-06 3.24963e-06 3e-06"/>
+                    
+                    <body name="r_DM_ballScrewEnd">
+                      <inertial pos="0.00013012 0.00788036 0.00054796" quat="0.49614 0.50383 -0.50383 0.49614" mass="0.00876173" diaginertia="1.20015e-06 1.18e-06 5.49846e-07"/>
+                    
+                      <body name="r_DM_ballScrew">
+                        <inertial pos="0.00047747 0.120298 0.00037389" quat="0.507178 0.505888 -0.494079 0.49268" mass="0.19714" diaginertia="0.00068019 0.000680185 3.6251e-06"/>
+                    
+                        <body name="r_DM_ballScrewNut" pos="0 0.14732 0">
+                          <inertial pos="0.00056724 -0.00759078 0.00037692" quat="0.000987569 0.707106 -0.000987569 0.707106" mass="0.109522" diaginertia="2.077e-05 1.891e-05 1.533e-05"/>
+                    
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                  <body name="r_DL_universalJoint" pos="-0.2295 -0.0188 0.0439999" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0.0155966 0.0001205 0.00021207" quat="0.504606 0.495351 0.504606 0.495351" mass="0.0206008" diaginertia="4.33037e-06 3.24963e-06 3e-06"/>
+                    <body name="r_DL_ballScrewEnd">
+                      <inertial pos="0.00012696 0.00793221 5.843e-05" quat="0.50383 0.49614 -0.49614 0.50383" mass="0.00876176" diaginertia="1.20015e-06 1.18e-06 5.49846e-07"/>
+                      <body name="r_DL_ballScrew">
+                        <inertial pos="0.00013664 0.120337 0.00013534" quat="0.541881 0.541533 -0.454274 0.454689" mass="0.19714" diaginertia="0.00068019 0.00068019 3.6296e-06"/>
+                        <body name="r_DL_ballScrewNut" pos="0 0.14732 0">
+                          <inertial pos="0.00013223 -0.00755153 0.00010991" quat="0 0.707107 0 0.707107" mass="0.109522" diaginertia="2.077e-05 1.891e-05 1.532e-05"/>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                  <body name="r_foot_ground" pos="0 -0.135 0" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0 0 0" mass="1e-06" diaginertia="1e-06 1e-06 1e-06"/>
+                    <geom name="r_foot" size="0.16 0.02 0.07" pos="-0.08 0.02 0" type="box" rgba="1 0 0 1"/>
+
+                  </body>
+                </body>
+              </body>
+              <body name="r_PM-universalJoint" pos="-0.0929998 -0.015 -0.128">
+                <inertial pos="0.0149574 0.0007084 0.00071015" quat="0.503853 0.50787 0.491406 0.49671" mass="0.0185407" diaginertia="4.1008e-06 3.02991e-06 2.82929e-06"/>
+                
+                <body name="r_PM_motor">
+                  <inertial pos="-0.0349995 -0.00998801 0.00107767" quat="0.429187 0.567212 -0.419495 0.563998" mass="0.710493" diaginertia="0.00149028 0.00137359 0.000459236"/>
+                  
+                  <body name="r_PM_motor_gear" pos="-0.0549999 -0.0499999 -0.015">
+                    <inertial pos="0.00037476 0.00202995 0.00117121" quat="0.707107 0.707107 0 0" mass="0.00985698" diaginertia="1.16e-06 1.16e-06 1.15e-06"/>
+                  </body>
+                  
+                  <body name="r_PM_ballScrewGear" pos="0 -0.0499999 0">
+                    <inertial pos="0.00018822 -0.00596056 0.00039574" quat="0.707105 0.00134941 -0.00134941 0.707105" mass="0.0142379" diaginertia="5.18004e-06 3.6e-06 2.55996e-06"/>
+                  </body>
+                
+                </body>
+              </body>
+              <body name="r_PL-universalJoint" pos="-0.0929998 -0.015 -0.012">
+                <inertial pos="0.0149574 0.0006754 -0.00118204" quat="0.505866 0.505866 0.494064 0.494064" mass="0.0185407" diaginertia="4.10071e-06 3.03e-06 2.82929e-06"/>
+                
+                <body name="r_PL_motor">
+                  <inertial pos="-0.0349995 -0.00998801 0.00107767" quat="0.429187 0.567212 -0.419495 0.563998" mass="0.710493" diaginertia="0.00149028 0.00137359 0.000459236"/>
+                  
+                  <body name="r_PL_motor_gear" pos="-0.0549999 -0.0499999 -0.015">
+                    <inertial pos="0.00038635 0.00184043 -6.847e-05" quat="0.707107 0.707107 0 0" mass="0.00985698" diaginertia="1.16e-06 1.16e-06 1.15e-06"/>
+                  </body>
+                  
+                  <body name="r_PL_ballScrewGear" pos="0 -0.0499999 0">
+                    <inertial pos="0.00019033 -0.00599488 -0.00072949" quat="0.707105 -0.00134941 0.00134941 0.707105" mass="0.0142379" diaginertia="5.18004e-06 3.6e-06 2.55996e-06"/>
+                  
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="l_exo_femur" pos="0.25 -0.06 -0.21">
+          <inertial pos="-0.00012287 -0.205637 -0.0391034" quat="0.708893 0.70037 -0.0578234 0.0600663" mass="2.77725" diaginertia="0.0379443 0.0352615 0.0041924"/>
+          <joint name="l_exo_femur" pos="0 0 0" axis="0 0 1" range="-1.309 1.309" actuatorfrcrange="-100 100"/>
+          <body name="l_exo_tibia" pos="0 -0.41 0">
+            <inertial pos="0.00130324 -0.0640757 -0.0163233" quat="0.7506 0.660735 -0.00529609 -0.000513906" mass="0.60426" diaginertia="0.00549748 0.00541102 0.000255628"/>
+            <joint name="l_exo_tibia" pos="0 0 0" axis="0 0 1" range="-2.094 0" actuatorfrcrange="-100 100"/>
+            <body name="l_shank_support" pos="0 -0.25 0">
+              <inertial pos="-0.0220563 -0.0501763 0.0332489" quat="0.940229 -0.285066 -0.178494 0.0533551" mass="0.24824" diaginertia="0.00101633 0.000827772 0.000328839"/>
+              <body name="l_ankle_coupling" pos="0 -0.129 0">
+                <inertial pos="0.0270888 -0.0211255 0.0183098" quat="0.388897 0.464459 0.535615 0.588349" mass="0.194678" diaginertia="0.000918354 0.000829915 0.000148771"/>
+                <joint name="l_ankle_coupling" pos="0 0 0" axis="0 0 1" range="-0.6981 0.2618" actuatorfrcrange="-100 100"/>
+                <body name="l_foot" pos="0.11 0.001 0.0699999" quat="0.989506 0 0 0.144492">
+                  <inertial pos="-0.0647188 -0.0863198 -0.00643328" quat="0.404663 0.669598 0.272277 0.560134" mass="1.39879" diaginertia="0.0171733 0.016392 0.00331607"/>
+                  <joint name="l_foot" pos="0 0 0" axis="-1 0 0" range="-0.2618 0.2618" actuatorfrcrange="-100 100"/>
+                  <body name="l_foot_end" pos="-0.175 0 0">
+                    <inertial pos="0 0 0" mass="1e-06" diaginertia="0.00010572 0.00010572 0.00010572"/>
+                  </body>
+                  <body name="l_DM_universalJoint" pos="-0.2295 -0.0188 0.0449999" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0.0155966 7.195e-05 -0.00034455" quat="0.504606 0.495351 0.504606 0.495351" mass="0.0206009" diaginertia="4.33037e-06 3.24963e-06 3e-06"/>
+                    <body name="l_DM_ballScrewEnd">
+                      <inertial pos="0.00013012 0.00788036 -0.00054796" quat="0.50383 0.49614 -0.49614 0.50383" mass="0.00876173" diaginertia="1.20015e-06 1.18e-06 5.49846e-07"/>
+                      <body name="l_DM_ballScrew">
+                        <inertial pos="0.00047747 0.120298 -0.00037389" quat="0.494079 0.49268 -0.507178 0.505888" mass="0.19714" diaginertia="0.00068019 0.000680185 3.6251e-06"/>
+                        <body name="l_DM_ballScrewNut" pos="0 0.14732 0">
+                          <inertial pos="0.00056724 -0.00759078 -0.00037692" quat="0.000987569 0.707106 -0.000987569 0.707106" mass="0.109522" diaginertia="2.077e-05 1.891e-05 1.533e-05"/>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                  <body name="l_DL_universalJoint" pos="-0.2295 -0.0188 -0.0439999" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0.0155966 0.0001205 -0.00021207" quat="0.495351 0.504606 0.495351 0.504606" mass="0.0206008" diaginertia="4.33037e-06 3.24963e-06 3e-06"/>
+                    <body name="l_DL_ballScrewEnd">
+                      <inertial pos="0.00012696 0.00793221 -5.843e-05" quat="0.49614 0.50383 -0.50383 0.49614" mass="0.00876176" diaginertia="1.20015e-06 1.18e-06 5.49846e-07"/>
+                      <body name="l_DL_ballScrew">
+                        <inertial pos="0.00013664 0.120337 -0.00013534" quat="0.454274 0.454689 -0.541881 0.541533" mass="0.19714" diaginertia="0.00068019 0.00068019 3.6296e-06"/>
+                        <body name="l_DL_ballScrewNut" pos="0 0.14732 0">
+                          <inertial pos="0.00013223 -0.00755153 -0.00010991" quat="0 0.707107 0 0.707107" mass="0.109522" diaginertia="2.077e-05 1.891e-05 1.532e-05"/>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                  <body name="l_foot_ground" pos="0 -0.135 0" quat="0.989506 -1.12116e-06 1.50458e-06 -0.144494">
+                    <inertial pos="0 0 0" mass="1e-06" diaginertia="1e-06 1e-06 1e-06"/>
+                    <geom name="l_foot" size="0.16 0.02 0.07" pos="-0.08 0.02 0" type="box" rgba="1 0 0 1"/>
+                  </body>
+                </body>
+              </body>
+              <body name="l_PM-universalJoint" pos="-0.0929998 -0.015 0.128">
+                <inertial pos="0.0149574 0.0007084 -0.00071015" quat="0.50787 0.503853 0.49671 0.491406" mass="0.0185407" diaginertia="4.1008e-06 3.02991e-06 2.82929e-06"/>
+                <body name="l_PM_motor">
+                  <inertial pos="-0.0349995 -0.00998801 -0.00107767" quat="0.419495 0.563998 -0.429187 0.567212" mass="0.710493" diaginertia="0.00149028 0.00137359 0.000459236"/>
+                  <body name="l_PM_motor_gear" pos="-0.0549999 -0.0499999 0.015">
+                    <inertial pos="0.00037476 0.00202995 -0.00117121" quat="0.707107 0.707107 0 0" mass="0.00985698" diaginertia="1.16e-06 1.16e-06 1.15e-06"/>
+                  </body>
+                  <body name="l_PM_ballScrewGear" pos="0 -0.0499999 0">
+                    <inertial pos="0.00018822 -0.00596056 -0.00039574" quat="0.707105 -0.00134941 0.00134941 0.707105" mass="0.0142379" diaginertia="5.18004e-06 3.6e-06 2.55996e-06"/>
+                  </body>
+                </body>
+              </body>
+              <body name="l_PL-universalJoint" pos="-0.0929998 -0.015 0.012">
+                <inertial pos="0.0149574 0.0006754 0.00118204" quat="0.505866 0.505866 0.494064 0.494064" mass="0.0185407" diaginertia="4.10071e-06 3.03e-06 2.82929e-06"/>
+                <body name="l_PL_motor">
+                  <inertial pos="-0.0349995 -0.00998801 -0.00107767" quat="0.419495 0.563998 -0.429187 0.567212" mass="0.710493" diaginertia="0.00149028 0.00137359 0.000459236"/>
+                  <body name="l_PL_motor_gear" pos="-0.0549999 -0.0499999 0.015">
+                    <inertial pos="0.00038635 0.00184043 6.847e-05" quat="0.707107 0.707107 0 0" mass="0.00985698" diaginertia="1.16e-06 1.16e-06 1.15e-06"/>
+                  </body>
+                  <body name="l_PL_ballScrewGear" pos="0 -0.0499999 0">
+                    <inertial pos="0.00019033 -0.00599488 0.00072949" quat="0.707105 0.00134941 -0.00134941 0.707105" mass="0.0142379" diaginertia="5.18004e-06 3.6e-06 2.55996e-06"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="Battery">
+          <inertial pos="-0.0292753 0.0823604 -0.00041407" quat="0.988544 -0.000723055 0.000764577 -0.150931" mass="2.2" diaginertia="0.00921543 0.00786844 0.00423976"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

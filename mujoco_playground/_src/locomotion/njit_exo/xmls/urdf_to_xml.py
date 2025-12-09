@@ -114,6 +114,10 @@ data = mujoco.MjData(model)
 # 2. Snap the robot to the "home" keyframe (ID 0)
 # This applies the standing position we defined in the XML
 mujoco.mj_resetDataKeyframe(model, data, 0)
+key_id = 0
+model.qpos0[:] = model.key_qpos[key_id]
+# 3. Set the current state to match (so it starts correctly)
+data.qpos[:] = model.key_qpos[key_id]
 mujoco.mj_forward(model, data) 
 
 # 3. Print the height to confirm it is correct
@@ -142,17 +146,63 @@ import mujoco.viewer
 
 # 1. Load the model
 model = mujoco.MjModel.from_xml_path('/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/scene_mjx_flat_terrain.xml')
+# model = mujoco.MjModel.from_xml_path('/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/njit_exo.xml')
+# model = mujoco.MjModel.from_xml_path('/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/KF_NJIT_rehab_exo_novisual_boxcollision.urdf')
+
 data = mujoco.MjData(model)
 
 # 2. VITAL STEP: Reset the state to your "home" keyframe (ID 0)
 # If you skip this, it will spawn at (0,0,0) instead of your QPOS.
 mujoco.mj_resetDataKeyframe(model, data, 0)
 
-key_id = 0
-model.qpos0[:] = model.key_qpos[key_id]
+# key_id = 0
+# model.qpos0[:] = model.key_qpos[key_id]
 
-# 3. Set the current state to match (so it starts correctly)
-data.qpos[:] = model.key_qpos[key_id]
+# # 3. Set the current state to match (so it starts correctly)
+# data.qpos[:] = model.key_qpos[key_id]
 # 3. Launch the viewer
 # The simulation will be paused at the start so you can check the position.
 mujoco.viewer.launch(model, data)
+
+
+#--------------------------------------------
+import time
+import mujoco
+import mujoco.viewer
+
+# 1. Load your model
+model = mujoco.MjModel.from_xml_path("/Users/zeyuchang/BioDynamic/mujoco_playground/mujoco_playground/_src/locomotion/njit_exo/xmls/scene_mjx_flat_terrain.xml")
+data = mujoco.MjData(model)
+
+# 2. Manage the pause state
+paused = True
+
+def key_callback(keycode):
+    """
+    Toggle the pause state when the Space bar is pressed.
+    """
+    if chr(keycode) == ' ':
+        global paused
+        paused = not paused
+
+# 3. Launch the passive viewer
+# This opens the window but does NOT automatically run the physics loop.
+with mujoco.viewer.launch_passive(model, data, key_callback=key_callback) as viewer:
+    
+    # Close the viewer automatically if the user closes the window
+    while viewer.is_running():
+        step_start = time.time()
+
+        # ONLY advance the physics if not paused
+        if not paused:
+            mujoco.mj_step(model, data)
+
+        # Sync the viewer with the current physics state
+        # This is necessary to render the frame even if paused
+        viewer.sync()
+
+        # Optional: Sleep to slow down to roughly real-time
+        # (remove this if you want maximum speed)
+        time_until_next_step = model.opt.timestep - (time.time() - step_start)
+        if time_until_next_step > 0:
+            time.sleep(time_until_next_step)
