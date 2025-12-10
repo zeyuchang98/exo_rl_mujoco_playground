@@ -21,7 +21,7 @@
         <inertial pos="0.164969 -0.016465 -0.00031201" mass="3.40529" fullinertia="0.108005 0.140273 0.0409718 0.00342849 0.00011722 -6.056e-05"/>
         <geom type="box" size="0.15 0.05 0.25" pos="0.134969 -0.016465 -0.00031201" class="visual"/>
         
-        <site name="imu" pos="0 0 0" size="0.01" rgba="1 0 0 1"/>
+        <site name="imu" pos="0 0 0" euler="-1.5707 0 0" size="0.01" rgba="1 0 0 1"/>
 
         <body name="Battery" pos="0 0 0">
            <inertial pos="-0.0292753 0.0823604 -0.00041407" mass="2.2" fullinertia="0.00909547 0.00798838 0.00423978 -0.00038364 -7.94e-06 -3.83e-06"/>

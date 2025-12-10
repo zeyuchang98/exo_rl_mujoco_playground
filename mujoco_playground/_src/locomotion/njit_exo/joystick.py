@@ -72,7 +72,7 @@ def default_config() -> config_dict.ConfigDict:
               feet_phase=1.0,
               # Other rewards.
               stand_still=0.0,
-              alive=0.0,
+              alive=1.0,
               termination=-1.0,
               # Pose related rewards.
               joint_deviation_knee=-0.1,
@@ -82,7 +82,7 @@ def default_config() -> config_dict.ConfigDict:
           ),
           tracking_sigma=0.5,
           max_foot_height=0.1,
-          base_height_target=1.2,
+          base_height_target=0.95,
       ),
       push_config=config_dict.create(
           enable=True,
