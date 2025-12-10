@@ -320,7 +320,7 @@ class Joystick(njit_exo_base.NjitExoEnv):
     rewards = {
         k: v * self._config.reward_config.scales[k] for k, v in rewards.items()
     }
-    reward = jp.clip(sum(rewards.values()) * self.dt, 0.0, 10000.0)
+    reward = jp.clip(sum(rewards.values()) * self.dt, -10000.0, 10000.0)
 
     state.info["push"] = push
     state.info["step"] += 1
