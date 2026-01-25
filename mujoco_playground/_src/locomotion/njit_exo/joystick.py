@@ -53,11 +53,11 @@ def default_config() -> config_dict.ConfigDict:
       reward_config=config_dict.create(
           scales=config_dict.create(
               # Tracking related rewards.
-              tracking_lin_vel=3.0,
+              tracking_lin_vel=2.0,
               tracking_ang_vel=0.5,
               # Base related rewards.
               lin_vel_z=0.0,
-              ang_vel_xy=-0.15,
+              ang_vel_xy=0.0,
               orientation=-1.0,
               base_height=0.0,
               # Energy related rewards.
@@ -72,7 +72,7 @@ def default_config() -> config_dict.ConfigDict:
               feet_phase=1.0,
               # Other rewards.
               stand_still=0.0,
-              alive=0.0,
+              alive=1.0,
               termination=0.0,
               # Pose related rewards.
               joint_deviation_knee=-0.1,
@@ -85,13 +85,13 @@ def default_config() -> config_dict.ConfigDict:
           base_height_target=0.92,
       ),
       push_config=config_dict.create(
-          enable=True,
+          enable=False,
           interval_range=[5.0, 10.0],
           magnitude_range=[0.1, 2.0],
       ),
-      lin_vel_x=[-1.0, 1.0],
-      lin_vel_y=[-1.0, 1.0],
-      ang_vel_yaw=[-1.0, 1.0],
+      lin_vel_x=[0.0, 0.5],
+      lin_vel_y=[0.0, 0.0],
+      ang_vel_yaw=[0.0, 0.0],
       impl="jax",
       nconmax=8 * 8192,
       njmax=60,
