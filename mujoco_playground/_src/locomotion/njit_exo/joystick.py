@@ -58,7 +58,7 @@ def default_config() -> config_dict.ConfigDict:
               # Base related rewards.
               lin_vel_z=0.0,
               ang_vel_xy=0.0,
-              orientation=-1.0,
+              orientation=-0.01,
               base_height=0.0,
               # Energy related rewards.
               torques=-2.5e-5,
@@ -78,10 +78,10 @@ def default_config() -> config_dict.ConfigDict:
               joint_deviation_knee=-0.1,
               joint_deviation_hip=-0.25,
               dof_pos_limits=-1.0,
-              pose=-1.0,
+              pose=-0.01,
           ),
           tracking_sigma=0.5,
-          max_foot_height=0.1,
+          max_foot_height=0.05,
           base_height_target=0.92,
       ),
       push_config=config_dict.create(
