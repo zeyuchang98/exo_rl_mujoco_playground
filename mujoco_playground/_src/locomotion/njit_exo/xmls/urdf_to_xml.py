@@ -140,7 +140,8 @@ pixels = renderer.render()
 image = Image.fromarray(pixels)
 image.save("initial_position.png")
 
-#--------------------------------------------
+#------------
+# --------------------------------
 import mujoco
 import mujoco.viewer
 

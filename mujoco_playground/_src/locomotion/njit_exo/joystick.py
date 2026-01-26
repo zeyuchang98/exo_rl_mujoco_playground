@@ -82,7 +82,7 @@ def default_config() -> config_dict.ConfigDict:
           ),
           tracking_sigma=0.5,
           max_foot_height=0.05,
-          base_height_target=0.92,
+          base_height_target=0.95,
       ),
       push_config=config_dict.create(
           enable=False,

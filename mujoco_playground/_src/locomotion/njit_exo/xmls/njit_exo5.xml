@@ -57,17 +57,18 @@
                 <body name="r_foot" pos="0.11 0.001 -0.0699999" euler="0 0 0.29">
                   <inertial pos="-0.0647188 -0.0863198 0.00643328" mass="1.39879" fullinertia="0.00411567 0.0161809 0.0165848 0.00314958 -0.00066379 -0.00019919"/>
                   <joint name="r_foot" class="motorized" axis="1 0 0" range="-0.2618 0.2618"/>
+                  
                   <geom type="box" size="0.16 0.025 0.075" pos="-0.0647188 -0.0863198 -0.00643328" euler="0 0 -0.285" class="visual"/>
                   
                   <site name="r_foot" pos="0 0 0" euler="-1.57 0 0" size="0.01" rgba="0 0 1 1"/>
-
-                  <body name="r_foot_ground" pos="0 -0.135 0" euler="3.14159 3.14159 2.85159">
-                     <geom type="sphere" size="0.02" pos="-0.22 0.02 0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="0.06 0.02 0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="-0.22 0.02 -0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="0.06 0.02 -0.04" rgba="1 0 0 1" group="1"/>
-                     <geom name="r_foot_col" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.0" class="collision"/>
-                  </body>
+                  
+                  <geom name="r_foot_col" type="box" size="0.16 0.025 0.075" 
+                        pos="-0.0647188 -0.0863198 -0.00643328" 
+                        euler="0 0 -0.285"
+                        rgba="0.8 0.2 0.2 0.5" group="0"
+                        friction="2.0 0.005 0.0001" 
+                        solimp="0.95 0.99 0.001" solref="0.005 1"
+                        contype="1" conaffinity="1" priority="1" condim="3"/>
                 </body>
               </body>
             </body>
@@ -95,17 +96,18 @@
                 <body name="l_foot" pos="0.11 0.001 0.0699999" euler="0 0 0.29">
                   <inertial pos="-0.0647188 -0.0863198 -0.00643328" mass="1.39879" fullinertia="0.00411567 0.0161809 0.0165848 0.00314958 0.00066379 0.00019919"/>
                   <joint name="l_foot" class="motorized" axis="-1 0 0" range="-0.2618 0.2618"/>
+                  
                   <geom type="box" size="0.16 0.025 0.075" pos="-0.0647188 -0.0863198 -0.00643328" euler="0 0 -0.285" class="visual"/>
-
+                  
                   <site name="l_foot" pos="0 0 0" euler="-1.57 0 0" size="0.01" rgba="0 0 1 1"/>
-
-                  <body name="l_foot_ground" pos="0 -0.135 0" euler="3.14159 3.14159 2.85159">
-                     <geom type="sphere" size="0.02" pos="-0.22 0.02 0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="0.06 0.02 0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="-0.22 0.02 -0.04" rgba="1 0 0 1" group="1"/>
-                     <geom type="sphere" size="0.02" pos="0.06 0.02 -0.04" rgba="1 0 0 1" group="1"/>
-                     <geom name="l_foot_col" type="box" size="0.16 0.02 0.07" pos="-0.08 0.02 0.0" class="collision"/>
-                  </body>
+                  
+                  <geom name="l_foot_col" type="box" size="0.16 0.025 0.075" 
+                        pos="-0.0647188 -0.0863198 -0.00643328" 
+                        euler="0 0 -0.285"
+                        rgba="0.8 0.2 0.2 0.5" group="0"
+                        friction="2.0 0.005 0.0001" 
+                        solimp="0.95 0.99 0.001" solref="0.005 1"
+                        contype="1" conaffinity="1" priority="1" condim="3"/>
                 </body>
               </body>
             </body>
