@@ -53,12 +53,12 @@ def default_config() -> config_dict.ConfigDict:
       reward_config=config_dict.create(
           scales=config_dict.create(
               # Tracking related rewards.
-              tracking_lin_vel=1.5,
+              tracking_lin_vel=3.0,
               tracking_ang_vel=0.5,
               # Base related rewards.
               lin_vel_z=0.0,
               ang_vel_xy=0.0,
-              orientation=-0.01,
+              orientation=-0.5,
               base_height=0.0,
               # Energy related rewards.
               torques=-2.5e-5,
@@ -71,8 +71,8 @@ def default_config() -> config_dict.ConfigDict:
               feet_height=0.0,
               feet_phase=1.0,
               # Other rewards.
-              stand_still=0.0,
-              alive=1.0,
+              stand_still=-0.5,
+              alive=2.0,
               termination=0.0,
               # Pose related rewards.
               joint_deviation_knee=-0.1,
