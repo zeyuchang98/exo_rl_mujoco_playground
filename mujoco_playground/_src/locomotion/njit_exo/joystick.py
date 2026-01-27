@@ -62,16 +62,16 @@ def default_config() -> config_dict.ConfigDict:
               base_height=-5.0,
               # Energy related rewards.
               torques=-2.5e-5,
-              action_rate=-0.01,
+              action_rate=-0.002,
               energy=0.0,
               # Feet related rewards.
-              feet_clearance=1.0,
-              feet_air_time=1.0,
+              feet_clearance=3.0,
+              feet_air_time=2.0,
               feet_slip=-0.25,
               feet_height=0.0,
-              feet_phase=2.0,
+              feet_phase=4.0,
               # Other rewards.
-              stand_still=-2.0,
+              stand_still=-2.5,
               alive=3.0,
               termination=0.0,
               # Pose related rewards.
@@ -81,7 +81,7 @@ def default_config() -> config_dict.ConfigDict:
               pose=-0.01,
           ),
           tracking_sigma=0.5,
-          max_foot_height=0.05,
+          max_foot_height=0.08,
           base_height_target=0.89,
       ),
       push_config=config_dict.create(
