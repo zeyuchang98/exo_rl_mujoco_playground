@@ -35,7 +35,7 @@ def default_config() -> config_dict.ConfigDict:
       sim_dt=0.002,
       episode_length=1000,
       action_repeat=1,
-      action_scale=0.5,
+      action_scale=0.3,
       history_len=1,
       soft_joint_pos_limit_factor=1.0,
       noise_config=config_dict.create(
@@ -53,26 +53,26 @@ def default_config() -> config_dict.ConfigDict:
       reward_config=config_dict.create(
           scales=config_dict.create(
               # Tracking related rewards.
-              tracking_lin_vel=5.0,
+              tracking_lin_vel=3.0,
               tracking_ang_vel=0.5,
               # Base related rewards.
               lin_vel_z=0.0,
-              ang_vel_xy=0.0,
+              ang_vel_xy=-0.005,
               orientation=-0.5,
-              base_height=0.0,
+              base_height=-2.0,
               # Energy related rewards.
               torques=-2.5e-5,
-              action_rate=-0.01,
+              action_rate=-0.05,
               energy=0.0,
               # Feet related rewards.
               feet_clearance=1.0,
-              feet_air_time=2.0,
+              feet_air_time=1.0,
               feet_slip=-0.25,
               feet_height=0.0,
-              feet_phase=1.0,
+              feet_phase=2.0,
               # Other rewards.
-              stand_still=-0.5,
-              alive=1.0,
+              stand_still=-1,
+              alive=1.5,
               termination=0.0,
               # Pose related rewards.
               joint_deviation_knee=-0.1,
@@ -87,9 +87,9 @@ def default_config() -> config_dict.ConfigDict:
       push_config=config_dict.create(
           enable=True,
           interval_range=[5.0, 10.0],
-          magnitude_range=[0.1, 2.0],
+          magnitude_range=[0.1, 1.5],
       ),
-      lin_vel_x=[0.1, 0.8],
+      lin_vel_x=[0.3, 0.6],
       lin_vel_y=[0.0, 0.0],
       ang_vel_yaw=[0.0, 0.0],
       impl="jax",
