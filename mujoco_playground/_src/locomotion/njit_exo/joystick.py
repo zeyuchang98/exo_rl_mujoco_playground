@@ -35,7 +35,7 @@ def default_config() -> config_dict.ConfigDict:
       sim_dt=0.002,
       episode_length=1000,
       action_repeat=1,
-      action_scale=0.3,
+      action_scale=0.4,
       history_len=1,
       soft_joint_pos_limit_factor=1.0,
       noise_config=config_dict.create(
@@ -53,16 +53,16 @@ def default_config() -> config_dict.ConfigDict:
       reward_config=config_dict.create(
           scales=config_dict.create(
               # Tracking related rewards.
-              tracking_lin_vel=3.0,
+              tracking_lin_vel=5.0,
               tracking_ang_vel=0.5,
               # Base related rewards.
               lin_vel_z=0.0,
               ang_vel_xy=-0.005,
               orientation=-0.5,
-              base_height=-2.0,
+              base_height=-5.0,
               # Energy related rewards.
               torques=-2.5e-5,
-              action_rate=-0.05,
+              action_rate=-0.01,
               energy=0.0,
               # Feet related rewards.
               feet_clearance=1.0,
@@ -71,8 +71,8 @@ def default_config() -> config_dict.ConfigDict:
               feet_height=0.0,
               feet_phase=2.0,
               # Other rewards.
-              stand_still=-1,
-              alive=1.5,
+              stand_still=-2.0,
+              alive=3.0,
               termination=0.0,
               # Pose related rewards.
               joint_deviation_knee=-0.1,
