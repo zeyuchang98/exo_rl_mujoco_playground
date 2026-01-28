@@ -52,10 +52,10 @@ def default_config() -> config_dict.ConfigDict:
       ),
       reward_config=config_dict.create(
           scales=config_dict.create(
-              tracking_lin_vel=3.0,  
+              tracking_lin_vel=5.0,  
               tracking_ang_vel=0.5,
               
-              feet_phase=10.0,       
+              feet_phase=5.0,       
               feet_clearance=2.0,    
               feet_air_time=2.0,
               
