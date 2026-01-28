@@ -62,10 +62,10 @@ def default_config() -> config_dict.ConfigDict:
               base_height=-5.0,
               # Energy related rewards.
               torques=-2.5e-5,
-              action_rate=-0.002,
+              action_rate=-0.01,
               energy=0.0,
               # Feet related rewards.
-              feet_clearance=3.0,
+              feet_clearance=0.0,
               feet_air_time=3.0,
               feet_slip=-0.25,
               feet_height=0.0,
