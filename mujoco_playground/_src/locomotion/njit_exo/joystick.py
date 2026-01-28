@@ -35,59 +35,58 @@ def default_config() -> config_dict.ConfigDict:
       sim_dt=0.002,
       episode_length=1000,
       action_repeat=1,
-      action_scale=0.3,
+      action_scale=0.35,
       history_len=1,
       soft_joint_pos_limit_factor=1.0,
       noise_config=config_dict.create(
-          level=1.0,  # Set to 0.0 to disable noise.
+          level=1.0,
           scales=config_dict.create(
-              hip_pos=0.05,  # rad
-              knee_pos=0.08,
-              ankle_pos=0.05,
-              joint_vel=1.5,  # rad/s
-              gravity=0.05,
-              linvel=0.1,
-              gyro=0.2,  # angvel.
+              hip_pos=0.02,
+              knee_pos=0.03,
+              ankle_pos=0.02,
+              joint_vel=0.5,
+              gravity=0.02,
+              linvel=0.05,
+              gyro=0.1,
           ),
       ),
       reward_config=config_dict.create(
           scales=config_dict.create(
-              # Tracking related rewards.
-              tracking_lin_vel=1.0,
+              tracking_lin_vel=3.0,  
               tracking_ang_vel=0.5,
-              # Base related rewards.
-              lin_vel_z=0.0,
-              ang_vel_xy=-0.15,
+              
+              feet_phase=10.0,       
+              feet_clearance=2.0,    
+              feet_air_time=2.0,
+              
+              lin_vel_z=-0.5,
+              ang_vel_xy=-0.05,
               orientation=-1.0,
-              base_height=0.0,
-              # Energy related rewards.
+              base_height=-5.0,
+              
               torques=-2.5e-5,
               action_rate=-0.01,
               energy=0.0,
-              # Feet related rewards.
-              feet_clearance=0.0,
-              feet_air_time=2.0,
               feet_slip=-0.25,
               feet_height=0.0,
-              feet_phase=1.0,
-              # Other rewards.
-              stand_still=0.0,
-              alive=0.0,
-              termination=-1.0,
-              # Pose related rewards.
-              joint_deviation_knee=-0.1,
-              joint_deviation_hip=-0.25,
-              dof_pos_limits=-1.0,
-              pose=-1.0,
+              
+              stand_still=-2.0,
+              alive=3.0,
+              termination=0.0,
+              
+              joint_deviation_knee=-0.2, 
+              joint_deviation_hip=-0.5,
+              dof_pos_limits=-5.0,
+              pose=-0.05,
           ),
           tracking_sigma=0.5,
           max_foot_height=0.08,
-          base_height_target=0.89,
+          base_height_target=0.88,
       ),
       push_config=config_dict.create(
           enable=True,
-          interval_range=[5.0, 10.0],
-          magnitude_range=[0.1, 1.5],
+          interval_range=[2.0, 4.0], 
+          magnitude_range=[0.5, 2.0],
       ),
       lin_vel_x=[0.3, 0.6],
       lin_vel_y=[0.0, 0.0],
@@ -320,7 +319,7 @@ class Joystick(njit_exo_base.NjitExoEnv):
     rewards = {
         k: v * self._config.reward_config.scales[k] for k, v in rewards.items()
     }
-    reward = jp.clip(sum(rewards.values()) * self.dt, -10000.0, 10000.0)
+    reward = jp.clip(sum(rewards.values()) * self.dt, 0.0, 10000.0)
 
     state.info["push"] = push
     state.info["step"] += 1
